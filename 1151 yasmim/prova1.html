@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prova JavaScript</title>
+    <style>
+        body {
+            background-color: rgb(111, 65, 153);
+        } main{
+            background-color: burlywood;
+            padding: 10px;
+            border-radius: 15px;
+            
+        } 
+    </style>
+</head>
+<body>
+    <main>
+        <h1>Financeamento de carros</h1>
+        <form action="salvar.php" method="get" onsubmit="return financiar()">
+            <label for="model">Qual o modelo do seu carro?</label>
+            <input type="text" id="model" name="model">
+            <br><label for="preco">Qual o preço do seu carro?</label>
+            <input type="number" id="preco" name="preco">
+            <br><label for="parc">Em quantas parcelas você irá pagar? </label>
+            <input type="number" id="parc" name="parc" min="1" max="36">
+           <br><input type="submit" value="Calcular">
+        </form>
+        <p id="res"></p>
+        
+    </main>
+
+    <script>
+        function financiar() {
+            let model= document.getElementById("model")
+            let preco= Number(document.getElementById("preco").value)
+            let parc= Number(document.getElementById("parc").value)
+            let res= document.getElementById("res")
+            let parcc= preco / parc          
+           
+            if(parc <= 4) {
+                res.innerHTML= `Você irá pagar R$${preco}. Suas parcelas serão de R$${parcc}`
+            } else if(parc >= 5 && parc <= 12) {
+                let porc= preco * 25 / 100
+                let total= preco + porc
+                res.innerHTML= `Você irá pagar R$${total}. Suas parcelas serão de R$${parcc}`
+            } else if(parc >= 13 && parc <= 24) {
+                let porc= preco * 60 / 100
+                let total= preco + porc
+                res.innerHTML= `Você irá pagar R$${total}. Suas parcelas serão de R$${parcc}`
+            } else if(parc > 24) {
+                let porc= preco * 80 / 100
+                let total= preco + porc
+                res.innerHTML= `Você irá pagar R$${total}. Suas parcelas serão de R$${parcc}`
+            }
+
+            return false
+        }
+    </script>
+</body>
+</html>
